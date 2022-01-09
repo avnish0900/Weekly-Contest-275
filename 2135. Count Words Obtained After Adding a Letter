@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int encode(string str){
+        int ans = 0;
+        for(char ch: str){
+            int x = ch - 'a';
+            ans += ((1 << x));
+        }
+        return ans;
+    }
+    int wordCount(vector<string>& startWords, vector<string>& targetWords) {
+        set<int> s;
+        for(string str: startWords){
+            s.insert(encode(str));
+        }
+        int ans = 0;
+        for(string str: targetWords){
+            int val = encode(str);
+            bool can = false;
+            for(int i=0; i<26; i++){
+                if(val & ((1<<i))){
+                    if(s.find(val-((1<<i)))!=s.end()){
+                        can = true;
+                    }
+                }
+            }
+            if(can){
+                ans++;
+            }
+        }
+        return ans;
+    }
+};
