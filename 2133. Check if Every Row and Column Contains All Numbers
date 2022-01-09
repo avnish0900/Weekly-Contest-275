@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool checkValid(vector<vector<int>>& arr) {
+        int xorr = 0;
+        int n = arr.size();
+        int m = arr[0].size();
+        for(int i=1; i<=n; i++){
+            xorr ^= i;
+        }
+        for(int i=0; i<n; i++){
+            int a = 0;
+            for(int j=0; j<m; j++){
+                a^=arr[i][j];
+            }
+            if(xorr != a){
+                return false;
+            }
+        }
+        for(int i=0; i<m; i++){
+            int a = 0;
+            for(int j=0; j<n; j++){
+                a^=arr[j][i];
+            }
+            if(xorr != a){
+                return false;
+            }
+        }
+        return true;
+    }
+};
